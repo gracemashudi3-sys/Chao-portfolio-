@@ -190,6 +190,42 @@ h2 {
   line-height: 1.45;
 }
 
+.about-copy + .about-copy {
+  margin-top: 1rem;
+  font-size: 1.15rem;
+}
+
+.work-card {
+  max-width: 68ch;
+  padding: 1.5rem 1.5rem 1.35rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.work-card h3 {
+  margin: 0.35rem 0 0.75rem;
+  font-size: 1.85rem;
+}
+
+.work-card h4 {
+  margin: 1.35rem 0 0.6rem;
+  font-family: "Source Sans 3", "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.duty-list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.duty-list li + li {
+  margin-top: 0.4rem;
+}
+
 .focus-list,
 .experience-list {
   list-style: none;

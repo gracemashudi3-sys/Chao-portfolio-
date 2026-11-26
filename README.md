@@ -13,14 +13,17 @@ The copy comes only from details that were provided:
 - Graduation: June 2027
 - The about paragraph, as written
 - Focus areas named in that paragraph
-- Three kinds of work named in that paragraph: media monitoring reports, formal correspondence, and community and stakeholder outreach
+- Her description of herself: a fast learner with strong focus and people skills, who delivers hands-on communication and stays optimistic and positive
 - Email: Chaokiteria@gmail.com
+- Attachment: Nairobi City County, Department of Public Communication, 1 July–31 August 2026, confirmed by recommendation letter NCCG/PC/ADAS/44/2026 dated 2 September 2026 and signed by CHRP-K Simon Macharia, Assistant Director, Administration Services
+- The nine areas of work named in that letter
+
+The national ID number printed on the letter is not on the page.
 
 ## Placeholders
 
 These stay empty until real details are provided. Do not invent them.
 
-- **Selected work** in `index.html`: named projects and links
 - **Contact** in `index.html`: social links. The email is already shown.
 
-Each placeholder is marked in the page and with an HTML comment directly above it.
+The placeholder is marked in the page and with an HTML comment directly above it.
