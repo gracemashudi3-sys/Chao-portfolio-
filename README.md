@@ -4,6 +4,12 @@ A one-page portfolio for Flora Chao, a 4th-year Corporate Communication and Mana
 
 Open `index.html` in a browser. There is no build step.
 
+## Docs
+
+- [Product architecture](docs/product_architecture.md) — who the page is for, the sections, and what is still empty
+- [Technical architecture](docs/technical_architecture.md) — how the static page is built
+- [Sprint](docs/sprint.md) — what is done and what is still open
+
 ## What is on the page
 
 The copy comes only from details that were provided:
