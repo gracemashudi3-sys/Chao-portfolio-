@@ -9,6 +9,20 @@
       content="Flora Chao is a 4th-year Corporate Communication student at JKUAT. She completed a public communication attachment at Nairobi City County from 1 July to 31 August 2026."
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script>
+      (function () {
+        var choice = "system";
+        try {
+          var saved = localStorage.getItem("flora-theme");
+          if (saved === "light" || saved === "dark" || saved === "system") {
+            choice = saved;
+          }
+        } catch (error) {
+          choice = "system";
+        }
+        document.documentElement.setAttribute("data-theme", choice);
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,15 +35,22 @@
     <a class="skip" href="#content">Skip to content</a>
     <header class="site-header">
       <a class="wordmark" href="#content">Flora Chao</a>
-      <nav aria-label="Page">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#focus">Focus</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <div class="header-tools">
+        <nav aria-label="Page">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#focus">Focus</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="theme" role="group" aria-label="Theme">
+          <button type="button" data-choice="light" aria-pressed="false">Light</button>
+          <button type="button" data-choice="dark" aria-pressed="false">Dark</button>
+          <button type="button" data-choice="system" aria-pressed="false">System</button>
+        </div>
+      </div>
     </header>
 
     <main id="content">
@@ -156,5 +177,37 @@
       <p>Flora Chao</p>
       <p>JKUAT · Expected graduation June 2027</p>
     </footer>
+    <script>
+      (function () {
+        var group = document.querySelector(".theme");
+        if (!group) return;
+
+        function paint() {
+          var choice = document.documentElement.getAttribute("data-theme") || "system";
+          group.querySelectorAll("button").forEach(function (button) {
+            button.setAttribute(
+              "aria-pressed",
+              button.getAttribute("data-choice") === choice ? "true" : "false"
+            );
+          });
+        }
+
+        group.addEventListener("click", function (event) {
+          var button = event.target.closest("button");
+          if (!button || !group.contains(button)) return;
+          var choice = button.getAttribute("data-choice");
+          if (choice !== "light" && choice !== "dark" && choice !== "system") return;
+          document.documentElement.setAttribute("data-theme", choice);
+          try {
+            localStorage.setItem("flora-theme", choice);
+          } catch (error) {
+            /* The choice still applies for this visit. */
+          }
+          paint();
+        });
+
+        paint();
+      })();
+    </script>
   </body>
 </html>

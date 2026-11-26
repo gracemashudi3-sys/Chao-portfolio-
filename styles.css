@@ -1,4 +1,6 @@
-:root {
+:root,
+html[data-theme="light"],
+html[data-theme="system"] {
   --paper: #f4f0e7;
   --ink: #1c1915;
   --muted: #4f4a42;
@@ -6,8 +8,36 @@
   --accent: #6d241f;
   --surface: #fbf8f2;
   --placeholder: #6b3e1c;
+  color-scheme: light;
   --measure: 68ch;
   --wrap: 70rem;
+}
+
+html[data-theme="dark"] {
+  --paper: #1a1714;
+  --ink: #f4f0e7;
+  --muted: #c9c0b4;
+  --line: #3d362e;
+  --accent: #e7b4ae;
+  --surface: #241f1b;
+  --placeholder: #e0b089;
+  color-scheme: dark;
+}
+
+html[data-theme="system"] {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] {
+    --paper: #1a1714;
+    --ink: #f4f0e7;
+    --muted: #c9c0b4;
+    --line: #3d362e;
+    --accent: #e7b4ae;
+    --surface: #241f1b;
+    --placeholder: #e0b089;
+  }
 }
 
 *,
@@ -88,6 +118,38 @@ a {
 .wordmark {
   font-size: 1.25rem;
   text-decoration: none;
+}
+
+.header-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem 1.25rem;
+}
+
+.theme {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.theme button {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+}
+
+.theme button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .site-header nav ul {
@@ -319,8 +381,9 @@ h2 {
     display: block;
   }
 
-  .site-header nav {
+  .header-tools {
     margin-top: 0.75rem;
+    justify-content: flex-start;
   }
 
   .facts {
