@@ -10,6 +10,22 @@
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <script>
+      function setFloraTheme(choice) {
+        if (choice !== "light" && choice !== "dark" && choice !== "system") return;
+        document.documentElement.setAttribute("data-theme", choice);
+        try {
+          localStorage.setItem("flora-theme", choice);
+        } catch (error) {
+          /* The choice still applies for this visit. */
+        }
+        var buttons = document.querySelectorAll(".theme button");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].setAttribute(
+            "aria-pressed",
+            buttons[i].getAttribute("data-choice") === choice ? "true" : "false"
+          );
+        }
+      }
       (function () {
         var choice = "system";
         try {
@@ -21,15 +37,39 @@
           choice = "system";
         }
         document.documentElement.setAttribute("data-theme", choice);
+        document.addEventListener("DOMContentLoaded", function () {
+          setFloraTheme(choice);
+        });
       })();
     </script>
+    <style>
+      html[data-theme="light"],
+      html[data-theme="light"] body,
+      html[data-theme="system"],
+      html[data-theme="system"] body {
+        background: #f4f0e7;
+        color: #1c1915;
+      }
+      html[data-theme="dark"],
+      html[data-theme="dark"] body {
+        background: #1a1714;
+        color: #f4f0e7;
+      }
+      @media (prefers-color-scheme: dark) {
+        html[data-theme="system"],
+        html[data-theme="system"] body {
+          background: #1a1714;
+          color: #f4f0e7;
+        }
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,620&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=2" />
   </head>
   <body>
     <a class="skip" href="#content">Skip to content</a>
@@ -46,9 +86,9 @@
           </ul>
         </nav>
         <div class="theme" role="group" aria-label="Theme">
-          <button type="button" data-choice="light" aria-pressed="false">Light</button>
-          <button type="button" data-choice="dark" aria-pressed="false">Dark</button>
-          <button type="button" data-choice="system" aria-pressed="false">System</button>
+          <button type="button" data-choice="light" aria-pressed="false" onclick="setFloraTheme('light')">Light</button>
+          <button type="button" data-choice="dark" aria-pressed="false" onclick="setFloraTheme('dark')">Dark</button>
+          <button type="button" data-choice="system" aria-pressed="false" onclick="setFloraTheme('system')">System</button>
         </div>
       </div>
     </header>
@@ -177,37 +217,5 @@
       <p>Flora Chao</p>
       <p>JKUAT · Expected graduation June 2027</p>
     </footer>
-    <script>
-      (function () {
-        var group = document.querySelector(".theme");
-        if (!group) return;
-
-        function paint() {
-          var choice = document.documentElement.getAttribute("data-theme") || "system";
-          group.querySelectorAll("button").forEach(function (button) {
-            button.setAttribute(
-              "aria-pressed",
-              button.getAttribute("data-choice") === choice ? "true" : "false"
-            );
-          });
-        }
-
-        group.addEventListener("click", function (event) {
-          var button = event.target.closest("button");
-          if (!button || !group.contains(button)) return;
-          var choice = button.getAttribute("data-choice");
-          if (choice !== "light" && choice !== "dark" && choice !== "system") return;
-          document.documentElement.setAttribute("data-theme", choice);
-          try {
-            localStorage.setItem("flora-theme", choice);
-          } catch (error) {
-            /* The choice still applies for this visit. */
-          }
-          paint();
-        });
-
-        paint();
-      })();
-    </script>
   </body>
 </html>
